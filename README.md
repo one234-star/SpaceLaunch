@@ -1,10 +1,13 @@
-# SpaceLaunch v5
+# SpaceLaunch
 
-A futuristic Solana token launchpad interface with a SpaceLaunch dashboard, wallet connection, real SPL token creation flow, token charts, and market-data hooks.
+Futuristic Solana token launchpad frontend.
 
-## Deployment
+## GitHub Pages
 
-This repository is prepared for GitHub Pages deployment as a static frontend. The real Solana launch flow runs in the browser through Phantom and Solana Web3.
+The site is deployed from `main` using GitHub Actions and the official GitHub Pages deployment actions. Pushes to `main` trigger a deployment.
 
-> Creating an SPL token and creating a tradable DEX market/liquidity pool are separate operations. This build can create the token; automatic DEX liquidity creation requires the corresponding DEX/launch protocol integration.
+Live site: https://one234-star.github.io/SpaceLaunch/
 
+## Notes
+
+This is a static frontend. Wallet and on-chain token creation happen in the browser. Token creation and DEX liquidity creation are separate operations.
