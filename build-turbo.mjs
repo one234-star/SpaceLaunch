@@ -6,7 +6,7 @@ await build({
   bundle: true,
   minify: true,
   platform: 'browser',
-  target: ['esnext'],
+  target: ['es2020'],
   format: 'iife',
   globalName: 'TurboSDK',
   plugins: [
@@ -19,7 +19,6 @@ await build({
       },
     }),
   ],
-  external: ['commander', 'cli-progress', 'x402-fetch'],
   outfile: 'turbo-sdk.js',
 });
 console.log('Built local Turbo browser bundle.');
