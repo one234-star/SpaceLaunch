@@ -15,7 +15,7 @@
 @media(max-width:1000px){.links{display:none}.search{display:none}.grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.market{grid-template-columns:1fr}.wizard{grid-template-columns:1fr}.hero{height:460px}.planet{width:300px;height:300px;right:-40px}.rocketArt{right:70px;top:90px}}
 @keyframes brandFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}@keyframes planetFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes rocketFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-13px) rotate(2deg)}}@keyframes orbitSpin{to{transform:rotate(338deg) scaleY(.34)}}@keyframes starsDrift{to{background-position:130px 130px}}@keyframes shooting{0%,65%,100%{transform:translate(0,0) rotate(-28deg);opacity:0}72%{opacity:.8}84%{transform:translate(-170px,95px) rotate(-28deg);opacity:0}}@keyframes copyIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes drawSpark{to{stroke-dashoffset:0}}@keyframes pulse{50%{transform:scale(1.7);opacity:.5}}@keyframes particleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}@media(max-width:620px){.nav{padding:0 12px}.wrap{padding:14px 10px}.brand{font-size:17px}.hero{padding:28px 20px}.hero h1{font-size:39px}.cards{grid-template-columns:1fr}.row{grid-template-columns:1fr}.tr{grid-template-columns:2fr 1fr 1fr}.tr:nth-child(4){display:none}}
 /* SpaceLaunch polish */.brandMark{width:36px!important;height:36px!important;border-radius:11px!important;display:grid!important;place-items:center!important;background:linear-gradient(145deg,#a45cff,#1bdcff)!important;box-shadow:0 0 24px #655cff66!important;position:relative!important;overflow:hidden!important}.brandMark:before{content:""!important;width:16px!important;height:16px!important;border:3px solid #fff!important;border-radius:50%!important;box-shadow:7px -7px 0 -5px #fff!important;transform:rotate(-30deg)!important}.brandMark:after{content:""!important;position:absolute!important;width:4px!important;height:12px!important;background:#fff!important;bottom:2px!important;transform:rotate(42deg)!important;border-radius:9px!important}.imagePick{transition:border-color .2s,box-shadow .2s}.imagePick:focus-within{border-color:#7b63ff;box-shadow:0 0 0 3px #7b63ff15}@media(max-width:620px){.hero{min-height:440px!important}.hero h1{font-size:40px!important}.rocketArt{right:58px!important;width:72px!important}.planet{width:285px!important;height:285px!important;right:-70px!important}.modalCard{width:100%!important;padding:16px!important}.wallet{padding:0 11px!important}} </style>
-</head>
+<script src="./turbo-sdk.js?v=30"></script>\n</head>
 <body>
 <nav class="nav">
   <a class="brand" href="#"><i class="brandMark" aria-hidden="true"></i><b>SpaceLaunch</b></a>
@@ -75,7 +75,7 @@ async function getTurboUploader(){
   turboUploaderPromise=(async()=>{
     let TurboFactory;
     try{
-      ({TurboFactory}=await import('./turbo-sdk.js'));
+      TurboFactory=window.TurboSDK?.TurboFactory;if(!TurboFactory)throw new Error('Local storage bundle is unavailable. Please reload SpaceLaunch.');
     }catch(e){
       console.error('Turbo SDK browser bundle failed:',e);
       throw new Error('Storage uploader could not load. '+(e?.message||'Unknown local bundle error'));
