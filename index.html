@@ -75,10 +75,10 @@ async function getTurboUploader(){
   turboUploaderPromise=(async()=>{
     let TurboFactory;
     try{
-      ({TurboFactory}=await import('https://cdn.jsdelivr.net/gh/ardriveapp/turbo-sdk@1.43.0/bundles/web.bundle.min.js'));
+      ({TurboFactory}=await import('./turbo-sdk.js'));
     }catch(e){
       console.error('Turbo SDK browser bundle failed:',e);
-      throw new Error('Storage SDK could not load: '+(e?.message||'Unknown SDK error'));
+      throw new Error('Storage uploader could not load. '+(e?.message||'Unknown local bundle error'));
     }
     if(!provider||!publicKey)throw new Error('Connect Phantom before uploading token metadata.');
     if(!provider.signMessage)throw new Error('Phantom message signing is unavailable in this browser.');
