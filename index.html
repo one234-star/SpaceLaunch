@@ -53,7 +53,7 @@ input:not([type="file"]):focus,textarea:focus,[contenteditable="true"]:focus{bor
 input:not([type="file"]).typing,textarea.typing,[contenteditable="true"].typing{animation:typingGlow .42s ease both}
 @media(prefers-reduced-motion:reduce){.brandMark,.brandMark path:first-child,.brandMark circle,.hero .moon,.hero .moon:before{animation:none!important}.field.typing,.search.typing,input.typing,textarea.typing{animation:none!important}}
 </style>
-<script src="./turbo-sdk.js?v=30"></script>
+<script src="./turbo-sdk.js?v=31"></script>
 </head>
 <body>
 <nav class="nav">
@@ -132,8 +132,8 @@ async function getTurboUploader(){
       ? {
           token:'solana',
           gatewayUrl:'https://api.devnet.solana.com',
-          paymentServiceConfig:{url:'https://payment.services.ar-io.dev'},
-          uploadServiceConfig:{url:'https://upload.services.ar-io.dev'}
+          paymentServiceConfig:{url:'https://payment.ardrive.dev'},
+          uploadServiceConfig:{url:'https://upload.ardrive.dev'}
         }
       : {token:'solana'};
     const walletAdapter={
@@ -153,8 +153,8 @@ function storageGateway(id){
 }
 async function uploadToStorage(file){
   const turbo=await getTurboUploader();
-  const res=await turbo.upload({
-    data:file,
+  const res=await turbo.uploadFile({
+    file,
     dataItemOpts:{tags:[
       {name:'Content-Type',value:file.type||'application/octet-stream'},
       {name:'App-Name',value:'SpaceLaunch'}
