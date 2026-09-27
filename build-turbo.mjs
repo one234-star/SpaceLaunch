@@ -7,7 +7,8 @@ await build({
   minify: true,
   platform: 'browser',
   target: ['esnext'],
-  format: 'esm',
+  format: 'iife',
+  globalName: 'TurboSDK',
   plugins: [
     polyfillNode({
       polyfills: {
