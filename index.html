@@ -75,10 +75,10 @@ async function getTurboUploader(){
   turboUploaderPromise=(async()=>{
     let TurboFactory;
     try{
-      ({TurboFactory}=await import('https://cdn.jsdelivr.net/gh/ardriveapp/turbo-sdk@latest/bundles/web.bundle.min.js'));
+      ({TurboFactory}=await import('https://cdn.jsdelivr.net/gh/ardriveapp/turbo-sdk@1.43.0/bundles/web.bundle.min.js'));
     }catch(e){
       console.error('Turbo SDK browser bundle failed:',e);
-      throw new Error('Storage SDK could not load. '+(e?.message||'Unknown SDK error'));
+      throw new Error('Storage SDK could not load: '+(e?.message||'Unknown SDK error'));
     }
     if(!provider||!publicKey)throw new Error('Connect Phantom before uploading token metadata.');
     if(!provider.signMessage)throw new Error('Phantom message signing is unavailable in this browser.');
@@ -86,8 +86,8 @@ async function getTurboUploader(){
       ? {
           token:'solana',
           gatewayUrl:'https://api.devnet.solana.com',
-          paymentServiceConfig:{url:'https://payment.ardrive.dev'},
-          uploadServiceConfig:{url:'https://upload.ardrive.dev'}
+          paymentServiceConfig:{url:'https://payment.services.ar-io.dev'},
+          uploadServiceConfig:{url:'https://upload.services.ar-io.dev'}
         }
       : {token:'solana'};
     const walletAdapter={
@@ -108,7 +108,7 @@ function storageGateway(id){
 async function uploadToStorage(file){
   const turbo=await getTurboUploader();
   const res=await turbo.upload({
-    file,
+    data:file,
     dataItemOpts:{tags:[
       {name:'Content-Type',value:file.type||'application/octet-stream'},
       {name:'App-Name',value:'SpaceLaunch'}
