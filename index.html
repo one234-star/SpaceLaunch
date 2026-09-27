@@ -75,10 +75,10 @@ async function getTurboUploader(){
   turboUploaderPromise=(async()=>{
     let TurboFactory;
     try{
-      ({TurboFactory}=await import('https://esm.sh/@ardrive/turbo-sdk@1.43.0/web?bundle'));
+      ({TurboFactory}=await import('https://esm.sh/@ardrive/turbo-sdk@1.43.0?bundle'));
     }catch(e){
       console.error('Turbo SDK import failed:',e);
-      throw new Error('Storage uploader could not load inside Phantom. Please refresh the page and try again.');
+      throw new Error('Storage SDK failed to load in Phantom: '+(e?.message||'unknown browser import error'));
     }
     if(!provider||!publicKey)throw new Error('Connect Phantom before uploading token metadata.');
     const walletAdapter={
