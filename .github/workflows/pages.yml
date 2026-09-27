@@ -16,6 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build local browser SDK
+        run: |
+          npm init -y
+          npm install --no-save @ardrive/turbo-sdk@1.43.0 esbuild@0.27.2 esbuild-plugin-polyfill-node@0.3.0
+          node build-turbo.mjs
       - uses: actions/upload-pages-artifact@v4
         with:
           path: .
