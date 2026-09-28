@@ -1,4 +1,4 @@
-name: Deploy SpaceLaunch to GitHub Pages
+name: Deploy PUMPLAND to GitHub Pages
 on:
   push:
     branches: [main]
@@ -7,6 +7,9 @@ permissions:
   contents: read
   pages: write
   id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
 jobs:
   deploy:
     environment:
@@ -14,23 +17,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
         with:
-          node-version: 20
-      - name: Build local browser SDK
-        run: |
-          npm init -y
-          npm install --no-save @ardrive/turbo-sdk@1.43.0 esbuild@0.27.2 esbuild-plugin-polyfill-node@0.3.0
-          node build-turbo.mjs
-      - name: Prepare Pages site
-        run: |
-          rm -rf _site
-          mkdir -p _site
-          cp index.html .nojekyll turbo-sdk.js _site/
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
-      - id: deployment
+          path: .
+      - name: Deploy
+        id: deployment
         uses: actions/deploy-pages@v4
